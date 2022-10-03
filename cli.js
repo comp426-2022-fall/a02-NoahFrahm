@@ -9,7 +9,7 @@ const args = minimist(process.argv.slice(2))
 const timezone = moment.tz.guess();
 var Latitude;
 var Longitude;
-const days = 0;
+var days = 0;
 
 if (args.h){
   console.log("Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE");
@@ -19,8 +19,53 @@ if (args.h){
   console.log("     -z            Time zone: uses tz.guess() from moment-timezone by default.");
   console.log("     -d 0-6        Day to retrieve weather: 0 is today; defaults to 1.");
   console.log("     -j            Echo pretty JSON from open-meteo API and exit.");
-  // exit 0;
+  process.exit(0);
 }
+
+if (args.j){
+  console.log({
+    "latitude": 35.875,
+    "longitude": -79,
+    "generationtime_ms": 0.44608116149902344,
+    "utc_offset_seconds": -14400,
+    "timezone": "America/New_York",
+    "timezone_abbreviation": "EDT",
+    "elevation": 127,
+    "current_weather": {
+      "temperature": 66.7,
+      "windspeed": 2.9,
+      "winddirection": 212,
+      "weathercode": 0,
+      "time": "2022-09-22T06:00"
+    },
+    "daily_units": {
+      "time": "iso8601",
+      "precipitation_hours": "h"
+    },
+    "daily": {
+      "time": [
+        "2022-09-22",
+        "2022-09-23",
+        "2022-09-24",
+        "2022-09-25",
+        "2022-09-26",
+        "2022-09-27",
+        "2022-09-28"
+      ],
+      "precipitation_hours": [
+        0,
+        0,
+        0,
+        3,
+        3,
+        0,
+        0
+      ]
+    }
+  })
+  process.exit(0);
+}
+
 
 //process days
 if (args.d){
@@ -70,6 +115,7 @@ const start_date = year + '-' + month + '-' + day
 const my_url = 'https://api.open-meteo.com/v1/forecast?latitude=' + Latitude + '&longitude=' + Longitude + '&daily=temperature_2m_max,temperature_2m_min,sunset,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&timezone=' + timezone +'&start_date=' + start_date + '&end_date=' + start_date
 const response = await fetch(my_url);
 const data = await response.json()
+
 
 //process response data
 const high = data['daily']['temperature_2m_max']
