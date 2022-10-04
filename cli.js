@@ -6,7 +6,7 @@ import fetch from "node-fetch";
 //run from command line using node cli.js
 
 const args = minimist(process.argv.slice(2))
-const timezone = moment.tz.guess();
+var timezone = moment.tz.guess();
 var Latitude;
 var Longitude;
 var days = 0;
@@ -75,6 +75,9 @@ if (args.d){
   else{
     days = args.d
   }
+}
+else {
+  days = 1
 }
 
 //process lat and long
