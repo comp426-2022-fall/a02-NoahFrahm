@@ -22,47 +22,51 @@ if (args.h){
   process.exit(0);
 }
 
+
+// // fix this to be the requested data
 if (args.j){
-  console.log({
-    "latitude": 35.875,
-    "longitude": -79,
-    "generationtime_ms": 0.44608116149902344,
-    "utc_offset_seconds": -14400,
-    "timezone": "America/New_York",
-    "timezone_abbreviation": "EDT",
-    "elevation": 127,
-    "current_weather": {
-      "temperature": 66.7,
-      "windspeed": 2.9,
-      "winddirection": 212,
-      "weathercode": 0,
-      "time": "2022-09-22T06:00"
-    },
-    "daily_units": {
-      "time": "iso8601",
-      "precipitation_hours": "h"
-    },
-    "daily": {
-      "time": [
-        "2022-09-22",
-        "2022-09-23",
-        "2022-09-24",
-        "2022-09-25",
-        "2022-09-26",
-        "2022-09-27",
-        "2022-09-28"
-      ],
-      "precipitation_hours": [
-        0,
-        0,
-        0,
-        3,
-        3,
-        0,
-        0
-      ]
-    }
-  })
+  // console.log({
+  //   "latitude": 35.875,
+  //   "longitude": -79,
+  //   "generationtime_ms": 0.44608116149902344,
+  //   "utc_offset_seconds": -14400,
+  //   "timezone": "America/New_York",
+  //   "timezone_abbreviation": "EDT",
+  //   "elevation": 127,
+  //   "current_weather": {
+  //     "temperature": 66.7,
+  //     "windspeed": 2.9,
+  //     "winddirection": 212,
+  //     "weathercode": 0,
+  //     "time": "2022-09-22T06:00"
+  //   },
+  //   "daily_units": {
+  //     "time": "iso8601",
+  //     "precipitation_hours": "h"
+  //   },
+  //   "daily": {
+  //     "time": [
+  //       "2022-09-22",
+  //       "2022-09-23",
+  //       "2022-09-24",
+  //       "2022-09-25",
+  //       "2022-09-26",
+  //       "2022-09-27",
+  //       "2022-09-28"
+  //     ],
+  //     "precipitation_hours": [
+  //       0,
+  //       0,
+  //       0,
+  //       3,
+  //       3,
+  //       0,
+  //       0
+  //     ]
+  //   }
+  // })
+
+  console.log("Latitude must be in range")
   process.exit(0);
 }
 
@@ -125,7 +129,14 @@ const start_date = year + '-' + month + '-' + day
 const my_url = 'https://api.open-meteo.com/v1/forecast?latitude=' + Latitude + '&longitude=' + Longitude + '&daily=temperature_2m_max,temperature_2m_min,sunset,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&timezone=' + timezone +'&start_date=' + start_date + '&end_date=' + start_date
 const response = await fetch(my_url);
 const data = await response.json()
+// console.log(data)
 
+// fix this to be the requested data
+// console.log(args.j)
+// if (args.j != null){
+//   console.log(data)
+//   process.exit(0);
+// }
 
 //process response data
 const high = data['daily']['temperature_2m_max']
