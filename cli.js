@@ -68,7 +68,9 @@ if (args.j){
 
 
 //process days
+// console.log(args.d)
 if (args.d){
+  // console.log("valid")
   if (args.d > 6 || args.d < 0){
     days = 0
   }
@@ -77,7 +79,12 @@ if (args.d){
   }
 }
 else {
+  if (args.d == 0){
+    days = 0
+  }
+  else{
   days = 1
+}
 }
 
 //process lat and long
@@ -129,7 +136,7 @@ const low_units = data['daily_units']['temperature_2m_min']
 console.log("The high will be " + high + high_units)
 console.log("The low will be " + low + low_units)
 
-
+// console.log(days)
 if (days == 0) {
   console.log("today.")
 } else if (days > 1) {
